@@ -1879,7 +1879,7 @@ efi_status_t EFIAPI efi_load_image(bool boot_policy,
 	efi_dp_split_file_path(file_path, &dp, &fp);
 	ret = efi_setup_loaded_image(dp, fp, image_obj, &info);
 	if (ret == EFI_SUCCESS)
-		ret = efi_load_pe(*image_obj, dest_buffer, info);
+		ret = efi_load_pe(*image_obj, dest_buffer, source_size, info);
 	if (!source_buffer)
 		/* Release buffer to which file was loaded */
 		efi_free_pages((uintptr_t)dest_buffer,
