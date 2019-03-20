@@ -27,6 +27,27 @@ struct key_prop {
 };
 
 /**
+ * rsa_gen_key_prop() - Generate key properties of RSA public key
+ * @key:	Specifies key data in DER format
+ * @keylen:	Length of @key
+ *
+ * This function takes a blob of encoded RSA public key data in DER
+ * format, parse it and generate all the relevant properties
+ * in key_prop structure.
+ *
+ * Return:	Pointer to struct key_prop on success, NULL on error
+ */
+struct key_prop *rsa_gen_key_prop(const void *key, uint32_t keylen);
+
+/**
+ * rsa_free_key_prop() - Free key properties
+ * @prop:	Pointer to struct key_prop
+ *
+ * This function frees all the memories allocated by rsa_gen_key_prop().
+ */
+void rsa_free_key_prop(struct key_prop *prop);
+
+/**
  * rsa_mod_exp_sw() - Perform RSA Modular Exponentiation in sw
  *
  * Operation: out[] = sig ^ exponent % modulus
