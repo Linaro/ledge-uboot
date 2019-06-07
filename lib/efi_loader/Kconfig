@@ -115,4 +115,20 @@ config EFI_GRUB_ARM32_WORKAROUND
 	  GRUB prior to version 2.04 requires U-Boot to disable caches. This
 	  workaround currently is also needed on systems with caches that
 	  cannot be managed via CP15.
+
+config EFI_SECURE_BOOT
+	bool "Enable EFI secure boot support"
+	depends on EFI_LOADER
+	imply SHA256
+        depends on ASYMMETRIC_PUBLIC_KEY_SUBTYPE
+        imply RSA_VERIFY_WITH_PKEY
+        imply X509_CERTIFICATE_PARSER
+        imply PCKS7_MESSAGE_PARSER
+	default n
+	help
+	  Select this option to enable EFI secure boot support.
+	  Once SecureBoot mode is enforced, any EFI binary can run only if
+	  it is signed with a trusted key. To do that, you need to install,
+	  at least, PK, KEK and db.
+
 endif
