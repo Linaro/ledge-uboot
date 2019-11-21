@@ -38,6 +38,14 @@ addons:
     - libisl15
     - clang-7
     - srecord
+    - coreutils
+    - util-linux
+    - dosfstools
+    - gdisk
+    - mount
+    - mtools
+    - openssl
+    - sbsigntool
 
 install:
  # Clone uboot-test-hooks
@@ -58,10 +66,11 @@ install:
  - mkdir ~/grub2-arm64
  - ( cd ~/grub2-arm64; wget -O - http://download.opensuse.org/ports/aarch64/distribution/leap/42.2/repo/oss/suse/aarch64/grub2-arm64-efi-2.02~beta2-87.1.aarch64.rpm | rpm2cpio | cpio -di )
  - wget http://mirrors.kernel.org/ubuntu/pool/main/m/mpfr4/libmpfr4_3.1.4-1_amd64.deb && sudo dpkg -i libmpfr4_3.1.4-1_amd64.deb && rm libmpfr4_3.1.4-1_amd64.deb
+ - wget http://mirrors.kernel.org/ubuntu/pool/universe/e/efitools/efitools_1.8.1-0ubuntu2_amd64.deb && sudo dpkg -i efitools_1.8.1-0ubuntu2_amd64.deb && rm efitools_1.8.1-0ubuntu2_amd64.deb
 
 env:
   global:
-    - PATH=/tmp/qemu-install/bin:/tmp/uboot-test-hooks/bin:/usr/bin:/bin:/usr/local/bin
+    - PATH=/tmp/qemu-install/bin:/tmp/uboot-test-hooks/bin:/sbin:/usr/bin:/bin:/usr/local/bin
     - PYTHONPATH=/tmp/uboot-test-hooks/py/travis-ci
     - BUILD_DIR=build
     - HOSTCC="cc"
