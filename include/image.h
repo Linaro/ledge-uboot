@@ -1427,6 +1427,8 @@ struct cipher_algo *image_get_cipher_algo(const char *full_name);
 #endif /* CONFIG_FIT_VERBOSE */
 #endif /* CONFIG_FIT */
 
+/* u32 won't be defined on host */
+#ifndef USE_HOSTCC
 #if defined(CONFIG_ANDROID_BOOT_IMAGE)
 struct andr_img_hdr;
 int android_image_check_header(const struct andr_img_hdr *hdr);
@@ -1448,6 +1450,7 @@ bool android_image_print_dtb_contents(ulong hdr_addr);
 #endif
 
 #endif /* CONFIG_ANDROID_BOOT_IMAGE */
+#endif /* USE_HOSTCC */
 
 /**
  * board_fit_config_name_match() - Check for a matching board name
