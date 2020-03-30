@@ -222,8 +222,10 @@ static void efi_set_code_and_data_type(
  */
 static int cmp_pe_section(const void *arg1, const void *arg2)
 {
-	const IMAGE_SECTION_HEADER *section1 = arg1, *section2 = arg2;
+	const IMAGE_SECTION_HEADER *section1, *section2;
 
+	section1 = *((const void **)arg1);
+	section2 = *((const void **)arg2);
 	if (section1->VirtualAddress < section2->VirtualAddress)
 		return -1;
 	else if (section1->VirtualAddress == section2->VirtualAddress)
